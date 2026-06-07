@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nt548-lab3
+  labels:
+    app: nt548-lab3
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nt548-lab3
+  template:
+    metadata:
+      labels:
+        app: nt548-lab3
+    spec:
+      containers:
+        - name: nt548-lab3
+          image: DOCKER_USERNAME/nt548-lab3:IMAGE_TAG
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
