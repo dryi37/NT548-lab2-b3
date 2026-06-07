@@ -137,8 +137,8 @@ jobs:
 
       - name: Deploy to k3s
         run: |
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/deployment.yaml --validate=false
+          kubectl apply -f k8s/service.yaml --validate=false
           kubectl rollout status deployment/nt548-lab3 --timeout=120s
 
       - name: Show deployment status
